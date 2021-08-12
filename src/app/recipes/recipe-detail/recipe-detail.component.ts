@@ -9,7 +9,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: ['./recipe-detail.component.css'],
 })
 export class RecipeDetailComponent implements OnInit {
-  // id: number;
+  id: number;
   recipe: Recipe;
 
   constructor(
@@ -20,7 +20,7 @@ export class RecipeDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      // this.id = +params['id']; // cast to number with the prefixing +
+      this.id = +params['id']; // cast to number with the prefixing +
       const id = +params['id']; // this doesn't need to be component scoped
       this.recipe = this.recipeService.getRecipe(id);
     });
@@ -31,6 +31,11 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onEditRecipe() {
-    this.router.navigate(['edit'], { relativeTo: this.route });
+    this.router.navigate(['edit'], { relativeTo: this.route }).then();
+  }
+
+  onDeleteRecipe() {
+    this.recipeService.deleteRecipe(this.id);
+    this.router.navigate(['/recipes']).then();
   }
 }
