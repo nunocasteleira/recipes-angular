@@ -9,6 +9,7 @@ import { map, tap } from 'rxjs/operators';
 export class DataStorageService {
   API_URI =
     'https://angular-recipes-d838d-default-rtdb.europe-west1.firebasedatabase.app/recipes.json';
+
   constructor(private http: HttpClient, private recipeService: RecipeService) {}
 
   storeRecipes() {
